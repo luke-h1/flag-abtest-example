@@ -23,21 +23,19 @@ export default function Home({ posts }: Props) {
 
   return (
     <section className={clsx(utilStyles.headingMd, utilStyles.padding1px)}>
-      <PostHogFeature flag="blog">
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {posts &&
-            posts.map(post => (
-              <li className={utilStyles.listItem} key={post.id}>
-                <Link href={`/posts/${post.id}`}>{post.title}</Link>
-                <br />
-                <small className={utilStyles.lightText}>
-                  <Date dateString={post.date as unknown as string} />
-                </small>
-              </li>
-            ))}
-        </ul>
-      </PostHogFeature>
+      <h2 className={utilStyles.headingLg}>Blog</h2>
+      <ul className={utilStyles.list}>
+        {posts &&
+          posts.map(post => (
+            <li className={utilStyles.listItem} key={post.id}>
+              <Link href={`/posts/${post.id}`}>{post.title}</Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                <Date dateString={post.date as unknown as string} />
+              </small>
+            </li>
+          ))}
+      </ul>
     </section>
   );
 }
