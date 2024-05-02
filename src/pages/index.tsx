@@ -17,6 +17,12 @@ export default function Home({ posts }: Props) {
     return (
       <div className="card">
         <h2>Come back at 12PM for the grand opening 🥳</h2>
+
+        <pre>
+          <code>
+            Feature flag <strong>blog</strong> is disabled. ❌
+          </code>
+        </pre>
       </div>
     );
   }
@@ -36,6 +42,11 @@ export default function Home({ posts }: Props) {
             </li>
           ))}
       </ul>
+      <pre>
+        <code>
+          Feature flag <strong>blog</strong> is enabled. ✅
+        </code>
+      </pre>
     </section>
   );
 }
