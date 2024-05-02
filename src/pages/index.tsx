@@ -13,8 +13,6 @@ interface Props {
 export default function Home({ posts }: Props) {
   const blogEnabled = useFeatureFlagEnabled('blog');
 
-  console.log('blogEnabled', blogEnabled);
-
   if (!blogEnabled) {
     return (
       <div className="card">
@@ -22,6 +20,7 @@ export default function Home({ posts }: Props) {
       </div>
     );
   }
+
   return (
     <section className={clsx(utilStyles.headingMd, utilStyles.padding1px)}>
       <h2 className={utilStyles.headingLg}>Blog</h2>
