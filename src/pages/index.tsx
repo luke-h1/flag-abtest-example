@@ -4,7 +4,7 @@ import { Post, getSortedPosts } from '@frontend/util/posts';
 import clsx from 'clsx';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import { useFeatureFlagEnabled } from 'posthog-js/react';
+import { PostHogFeature, useFeatureFlagEnabled } from 'posthog-js/react';
 
 interface Props {
   posts: Post[];
@@ -23,19 +23,21 @@ export default function Home({ posts }: Props) {
 
   return (
     <section className={clsx(utilStyles.headingMd, utilStyles.padding1px)}>
-      <h2 className={utilStyles.headingLg}>Blog</h2>
-      <ul className={utilStyles.list}>
-        {posts &&
-          posts.map(post => (
-            <li className={utilStyles.listItem} key={post.id}>
-              <Link href={`/posts/${post.id}`}>{post.title}</Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={post.date as unknown as string} />
-              </small>
-            </li>
-          ))}
-      </ul>
+      <PostHogFeature flag="blog">
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {posts &&
+            posts.map(post => (
+              <li className={utilStyles.listItem} key={post.id}>
+                <Link href={`/posts/${post.id}`}>{post.title}</Link>
+                <br />
+                <small className={utilStyles.lightText}>
+                  <Date dateString={post.date as unknown as string} />
+                </small>
+              </li>
+            ))}
+        </ul>
+      </PostHogFeature>
     </section>
   );
 }
